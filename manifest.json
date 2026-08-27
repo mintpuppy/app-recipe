@@ -1,0 +1,19 @@
+{
+  "name": "アプリのレシピ帳",
+  "short_name": "レシピ帳",
+  "description": "アイデアを書きとめて、ChatGPTとClaudeでアプリを作り、GitHubで公開するまでを支えるレシピ帳。",
+  "lang": "ja",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F2F1EB",
+  "theme_color": "#F2F1EB",
+  "icons": [
+    { "src": "./favicon-32.png", "sizes": "32x32", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

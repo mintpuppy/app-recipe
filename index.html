@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>アプリのレシピ帳</title>
+<meta name="description" content="アイデアを書きとめて、ChatGPTとClaudeでアプリを作り、GitHubで公開するまでを支えるレシピ帳。">
+<meta name="theme-color" content="#F2F1EB">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="レシピ帳">
+<link rel="stylesheet" href="./style.css">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<script src="./script.js" defer></script>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="gk topband"></div>
+  <header class="masthead">
+    <h1>アプリのレシピ帳</h1>
+    <p>思いつく ─ 書きとめる ─ つくる ─ 公開する</p>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="ページを選ぶ">
+    <button class="tab" role="tab" id="tab-memo" aria-controls="pg-memo" aria-selected="true">アイデア<span class="en">IDEA</span></button>
+    <button class="tab" role="tab" id="tab-make" aria-controls="pg-make" aria-selected="false">レシピ<span class="en">RECIPE</span></button>
+    <button class="tab" role="tab" id="tab-shelf" aria-controls="pg-shelf" aria-selected="false">ノート<span class="en">NOTE</span></button>
+  </div>
+
+  <section class="page" id="pg-memo" role="tabpanel" aria-labelledby="tab-memo">
+
+    <p class="ghead">どんなアプリ？</p>
+    <div class="group">
+      <label class="row"><span class="lab">アプリ名（仮でいい）<em>必須</em></span>
+        <input type="text" id="f-name" placeholder="例：旅行チェックリスト"></label>
+      <label class="row"><span class="lab">一言でいうと</span>
+        <input type="text" id="f-one" placeholder="例：持ち物の抜けをなくすチェック表"></label>
+      <label class="row"><span class="lab">作りたい理由</span>
+        <textarea id="f-why" placeholder="例：毎回同じ物を忘れて、出発前に焦るから"></textarea></label>
+    </div>
+
+    <p class="ghead">だれが、いつ使う？</p>
+    <div class="group">
+      <label class="row"><span class="lab">使う人</span>
+        <input type="text" id="f-who" placeholder="例：自分ひとり"></label>
+      <label class="row"><span class="lab">使う場面</span>
+        <input type="text" id="f-when" placeholder="例：出発前夜、スマホで"></label>
+      <label class="row"><span class="lab">解決したい困りごと</span>
+        <textarea id="f-pain" placeholder="例：頭の中だけで管理すると必ず何か抜ける"></textarea></label>
+    </div>
+
+    <p class="ghead">入れたい機能<span class="r">押して選ぶ</span></p>
+    <div class="group">
+      <div class="chips" id="c-func"></div>
+      <label class="row"><span class="lab">ほかに欲しい動き</span>
+        <textarea id="f-func" placeholder="例：チェックした物は下に移動してほしい"></textarea></label>
+    </div>
+
+    <p class="ghead">見た目の好み<span class="r">押して選ぶ</span></p>
+    <div class="group">
+      <div class="chips" id="c-look"></div>
+      <label class="row"><span class="lab">補足</span>
+        <input type="text" id="f-look" placeholder="例：色は3色まで"></label>
+    </div>
+
+    <p class="ghead">使い心地の配慮<span class="r">押して選ぶ</span></p>
+    <div class="group">
+      <div class="chips" id="c-care"></div>
+      <label class="row"><span class="lab">補足</span>
+        <input type="text" id="f-care" placeholder="例：一画面に情報を詰め込まない"></label>
+    </div>
+
+    <p class="ghead">メモ</p>
+    <div class="group">
+      <label class="row"><span class="lab">自由メモ</span>
+        <textarea id="f-memo" placeholder="思いついたこと、参考にしたいアプリなど"></textarea></label>
+    </div>
+
+    <p class="ghead">タグ<button class="lnk" id="b-tagedit">編集</button></p>
+    <div class="group">
+      <div class="chips" id="c-tag"></div>
+      <p class="hint" id="tag-hint"></p>
+    </div>
+
+    <p class="ghead">ChatGPT用プロンプト</p>
+    <div class="group">
+      <label class="check pad-check">
+        <input type="checkbox" id="f-common" checked>
+        <span class="box"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3.2L13 5"/></svg></span>
+        <span class="tx"><span>iPhoneで公開するための共通条件を入れる</span></span>
+      </label>
+      <div class="pre"><pre id="out">アプリ名を入れると、ここに文章ができます。</pre></div>
+      <p class="note-s">この文章をそのままChatGPTに貼ると、Claude用に整えたプロンプトが返ってきます。</p>
+    </div>
+
+    <div class="stack">
+      <button class="btn" id="b-copy">プロンプトをコピー</button>
+      <button class="btn tint" id="b-save">ノートに保存</button>
+      <button class="btn plain" id="b-clear">ノートに保存して、入力を消す</button>
+    </div>
+    <p class="note-s edit-note" id="editing-note" hidden></p>
+  </section>
+
+  <section class="page" id="pg-make" role="tabpanel" aria-labelledby="tab-make" hidden>
+    <div class="group"><div class="marks" id="marks"></div></div>
+
+    <p class="ghead">つくる手順</p>
+    <div class="group" id="steps"></div>
+
+    <p class="ghead">注意点</p>
+    <div id="safety"></div>
+
+    <div class="stack">
+      <button class="btn plain" id="b-reset">チェックを全部リセットする</button>
+    </div>
+  </section>
+
+  <section class="page" id="pg-shelf" role="tabpanel" aria-labelledby="tab-shelf" hidden>
+    <p class="ghead">これまでのアイデア<span class="r" id="cnt"></span></p>
+    <div class="group" id="shelf"></div>
+  </section>
+
+</div>
+
+<div class="spread" id="spread" hidden><div class="sheet" id="sheet"></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
